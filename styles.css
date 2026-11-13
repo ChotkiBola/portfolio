@@ -175,3 +175,10 @@ a { color: inherit; }
   .contact-grid .mascot-wave { grid-column: 1; grid-row: 1; width: min(55%, 220px); justify-self: center; }
   .contact-grid .contact-text { grid-row: 2; }
 }
+
+/* --- yuklab olish --- */
+.dl { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 28px; }
+.dl-meta { font-size: 14px; color: var(--mist); }
+.feature-text p.dl-note { font-size: 13px; color: var(--mist); margin: 10px 0 0; }
+.ig { font: 700 20px/1.2 var(--display); color: var(--snow); text-decoration: none; }
+.ig:hover { color: var(--amber); }

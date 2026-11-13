@@ -27,6 +27,8 @@ window.I18N = {
     'course.cta': "Navbatga yozilish",
     'contact.title': "Birga nimadir yasaymizmi?",
     'contact.text': "Sayt, ilova, AI-video yoki kontent — yozing, gaplashamiz.",
+    'dl.btn': "Bepul yuklab olish",
+    'dl.note': "Windows ogohlantirsa: «Batafsil» → «Baribir ishga tushirish».",
   },
   ru: {
     'meta.title': "Анвар Зарифов — не пишу код, создаю приложения",
@@ -55,6 +57,8 @@ window.I18N = {
     'course.cta': "Записаться в очередь",
     'contact.title': "Сделаем что-нибудь вместе?",
     'contact.text': "Сайт, приложение, ИИ-видео или контент — пишите, обсудим.",
+    'dl.btn': "Скачать бесплатно",
+    'dl.note': "Если Windows предупредит: «Подробнее» → «Выполнить в любом случае».",
   },
   en: {
     'meta.title': "Anvar Zarifov — I don't write code, I ship apps",
@@ -83,5 +87,7 @@ window.I18N = {
     'course.cta': "Join the waitlist",
     'contact.title': "Shall we build something?",
     'contact.text': "A website, an app, an AI video or content — write to me and let's talk.",
+    'dl.btn': "Download free",
+    'dl.note': "If Windows warns you: “More info” → “Run anyway”.",
   },
 };

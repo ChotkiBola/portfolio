@@ -3,9 +3,9 @@
   'use strict';
   // ---- aloqa havolalari: shu yerni to'ldiring ----
   const CONTACT = {
-    instagram: '',   // masalan: 'https://instagram.com/username'
-    telegram: '',    // masalan: 'https://t.me/username'
-    email: '',       // masalan: 'mailto:siz@gmail.com'
+    instagram: 'https://www.instagram.com/vaybbloger/',
+    telegram: 'https://t.me/hisperspective',
+    email: 'mailto:anvarzarifov200406@gmail.com',
   };
   document.querySelectorAll('[data-contact]').forEach(a => {
     const url = CONTACT[a.dataset.contact];
