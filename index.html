@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anvar Zarifov — kod yozmayman, ilova yasayman</title>
+<meta name="description" content="Anvar Zarifov — AI bilan ilova yasaydigan o'zbek vibe-koder va kontent-meyker. Guli, Osmon, IELTS Coach, Tarjimon va boshqa loyihalar.">
+<meta name="author" content="Anvar Zarifov">
+<meta property="og:title" content="Anvar Zarifov — kod yozmayman, ilova yasayman">
+<meta property="og:description" content="AI bilan yasalgan ilovalar, saytlar va kontent.">
+<meta property="og:image" content="/assets/og.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E1630">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#top">Anvar Zarifov</a>
+  <nav class="nav" aria-label="Bo'limlar">
+    <a href="#works" data-i18n="nav.works">Ishlarim</a>
+    <a href="#about" data-i18n="nav.about">Men haqimda</a>
+    <a href="#course" data-i18n="nav.course">Kurs</a>
+    <a href="#contact" data-i18n="nav.contact">Aloqa</a>
+  </nav>
+  <div class="lang" role="group" aria-label="Til">
+    <button type="button" data-lang="uz">UZ</button>
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero" id="hero">
+  <picture class="hero-art">
+    <source media="(max-width: 760px)" srcset="/assets/hero-m.webp">
+    <img src="/assets/hero.webp" alt="" fetchpriority="high">
+  </picture>
+  <video class="hero-video" muted loop playsinline preload="none" poster="/assets/hero.webp" data-src="/assets/hero.mp4" aria-hidden="true"></video>
+  <div class="hero-shade"></div>
+  <canvas class="snow" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <h1 class="hero-title" data-i18n-html="hero.title">Kod yozmayman.<br>Ilova yasayman.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Men Anvar Zarifov — AI bilan ishlaydigan o'zbek vibe-koder va kontent-meyker. O'zbekcha gapiradigan desktop yordamchi, ish stoliga qor yog'diradigan ilova, IELTS platformasi: hammasini o'zim yasaganman.</p>
+    <div class="hero-cta">
+      <a class="btn btn-amber ledge" href="#works" data-i18n="hero.cta1">Ishlarimni ko'rish</a>
+      <a class="btn btn-ghost ledge" href="#contact" data-i18n="hero.cta2">Bog'lanish</a>
+    </div>
+    <p class="hero-hint"><button type="button" class="snow-toggle" aria-pressed="true"><span aria-hidden="true">❄</span> <span data-i18n="hero.hint">Bu sahifada ham qor yog'yapti — kursor bilan supurib ko'ring</span></button></p>
+  </div>
+</section>
+
+<section class="works" id="works" aria-labelledby="works-h">
+  <div class="wrap">
+    <h2 id="works-h" class="h2" data-i18n="works.title">Yasagan narsalarim</h2>
+    <p class="lead" data-i18n="works.lead">Har biri — haqiqiy muammodan boshlangan. Ba'zilari ish stolida yashaydi, ba'zilari brauzerda, ba'zilari mijozlarim uchun ishlaydi.</p>
+  </div>
+
+  <h3 class="group wrap" data-i18n="works.g1">Ish stoli ilovalari</h3>
+  <article class="feature wrap">
+    <div class="feature-media">
+      <video muted loop playsinline preload="none" poster="/assets/media/guli.jpg" data-src="/assets/media/guli.mp4"></video>
+    </div>
+    <div class="feature-text">
+      <h4 class="name">Guli</h4>
+      <p class="kicker" data-i18n="guli.kicker">O'zbekcha gapiradigan desktop yordamchi</p>
+      <p data-i18n="guli.text">Ish stolingizda yashaydigan qiz. O'zbek tilida gaplashadi, ovozi — VoiceLab'dan. Oynalar ustida yuradi, YouTube ochsangiz choy damlab yoningizga o'tiradi, Yangi yilda ketmonda uchadi. Kim yaratganini so'rasangiz, ismimni aytadi.</p>
+      <ul class="tags"><li>Electron</li><li>VoiceLab</li><li>Claude · GPT · Gemini</li><li>Windows · Mac</li></ul>
+    </div>
+  </article>
+  <article class="feature feature-rev wrap">
+    <div class="feature-media">
+      <video muted loop playsinline preload="none" poster="/assets/media/osmon.jpg" data-src="/assets/media/osmon.mp4"></video>
+    </div>
+    <div class="feature-text">
+      <h4 class="name">Osmon</h4>
+      <p class="kicker" data-i18n="osmon.kicker">Ish stoliga ob-havo</p>
+      <p data-i18n="osmon.text">Qor oynalaringiz ustiga yig'iladi, oynani sursangiz to'kilib tushadi. Kursor bilan qor dumalatib qorbobo yasaysiz, yomg'ir oynadan oqib tushadi, taskbarni qor tozalash mashinasi kurab o'tadi. Fonlarda — teleminora, Chorsu, Registon, Xiva.</p>
+      <ul class="tags"><li>Electron</li><li>Canvas</li><li>Higgsfield</li></ul>
+    </div>
+  </article>
+
+  <h3 class="group wrap" data-i18n="works.g2">Veb-ilovalar</h3>
+  <div class="apps wrap">
+    <a class="app" href="https://ielts-app-livid.vercel.app/" target="_blank" rel="noopener">
+      <img src="/assets/shots/ielts.webp" alt="IELTS Coach" loading="lazy" width="1200" height="750">
+      <span class="app-name">IELTS Coach</span>
+      <span class="app-text" data-i18n="ielts.text">Insho yoki speaking javobingizni bir daqiqada baholaydi va qaysi gap ball yo'qotganini ko'rsatadi. Real vaqtda gaplashadigan AI-imtihonchi bilan.</span>
+    </a>
+    <a class="app" href="https://tarjimon-25zf.onrender.com/" target="_blank" rel="noopener">
+      <img src="/assets/shots/tarjimon.webp" alt="Tarjimon" loading="lazy" width="1200" height="750">
+      <span class="app-name">Tarjimon</span>
+      <span class="app-text" data-i18n="tarjimon.text">Telegram'dagi ruscha xabarni o'zbekcha ko'rsatadi, o'zbekcha javobingizni ma'nosi bo'yicha ruschaga o'girib yuboradi. Ruscha gapiradigan boshliq bilan ishlash uchun o'zimga yasaganman.</span>
+    </a>
+  </div>
+
+  <div class="content wrap">
+    <div class="content-text">
+      <h3 class="group-inline" data-i18n="works.g4">Kontent</h3>
+      <p data-i18n="content.text">Instagram'da vibe-coding va texno-yangiliklar haqida videolar qilaman: nima yasadim, qanday yasadim, qayerda adashdim. Montaj, ssenariy va animatsiya — AI bilan.</p>
+      <p class="ebook" data-i18n-html="content.ebook">E-kitob: <b>Create Trending E-Invitations with Claude</b> — kod bilmasdan zamonaviy elektron taklifnoma yasash bo'yicha.</p>
+    </div>
+    <div class="phone">
+      <video controls playsinline preload="none" poster="/assets/media/reel-osmon.jpg" src="/assets/media/reel-osmon.mp4"></video>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about" aria-labelledby="about-h">
+  <div class="wrap about-grid">
+    <div class="about-head">
+      <h2 id="about-h" class="h2" data-i18n-html="about.title">Marketologlikka o'qidim.<br>Dasturchi bo'lib chiqdim.</h2>
+      <img class="me" src="/assets/me-laptop.webp" alt="Anvar Zarifov — 3D obraz" loading="lazy" width="846" height="1200">
+    </div>
+    <div class="about-body">
+      <p class="big" data-i18n="about.p1">G'oyani kechqurun yozaman — ertalab u jonli saytda ishlaydi. AI — mening jamoam: Claude, GPT, Gemini va Higgsfield men bilan birga ishlaydi.</p>
+      <p data-i18n="about.p2">Qashqadaryo, G'uzor tumanidanman. JOMU'da media-marketing va reklamani o'qidim, hozir Toshkent davlat iqtisodiyot universitetida magistrman. Kunduzi kontent bilan ishlayman, kechqurun ilova yasayman.</p>
+      <p data-i18n="about.p3">Har bir loyihamda o'zbekcha ruh bor: yordamchim o'zbekcha gapiradi, ilovamda Registon ustidan yulduz uchadi. O'zbek, rus va ingliz tillarida ishlayman.</p>
+    </div>
+  </div>
+</section>
+
+<section class="course" id="course" aria-labelledby="course-h">
+  <div class="wrap course-in">
+    <img class="mascot mascot-course" src="/assets/me-wave.webp" alt="" loading="lazy">
+    <div class="course-text">
+    <p class="soon" data-i18n="course.soon">Tez kunda</p>
+    <h2 id="course-h" class="h2">Claude: Noldan Progacha</h2>
+    <p class="lead" data-i18n="course.text">Kod bilmasdan ilova yasashni o'rgataman — o'zim qanday o'rgangan bo'lsam, xuddi shunday. O'zbek tilida, birinchi so'rovdan tayyor saytgacha.</p>
+    <a class="btn btn-amber" data-contact="telegram" href="#contact" data-i18n="course.cta">Navbatga yozilish</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <img class="mascot mascot-wave" src="/assets/guli-wave.webp" alt="Guli" loading="lazy">
+    <div class="contact-text">
+    <h2 class="h2" data-i18n="contact.title">Birga nimadir yasaymizmi?</h2>
+    <p class="lead" data-i18n="contact.text">Sayt, ilova, AI-video yoki kontent — yozing, gaplashamiz.</p>
+    <ul class="links">
+      <li><a data-contact="instagram" href="#" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a data-contact="telegram" href="#" target="_blank" rel="noopener">Telegram</a></li>
+      <li><a href="https://www.linkedin.com/in/anvar-zarifov-6b5520252/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a data-contact="email" href="#">Email</a></li>
+    </ul>
+    </div>
+    <p class="copy">© 2026 Anvar Zarifov</p>
+  </div>
+</footer>
+
+<script src="/js/snow.js" defer></script>
+<script src="/js/i18n.js" defer></script>
+<script src="/js/app.js" defer></script>
+</body>
+</html>
