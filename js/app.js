@@ -16,6 +16,8 @@
   // ---- til ----
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   const langs = ['uz', 'ru', 'en'];
+  let cur = 'uz';
+  const touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   function guess() {
     const saved = store.get('lang'); if (langs.includes(saved)) return saved;
     const n = (navigator.language || 'uz').slice(0, 2).toLowerCase();
@@ -26,13 +28,41 @@
     document.documentElement.lang = l;
     document.querySelectorAll('[data-i18n]').forEach(el => { const v = d[el.dataset.i18n]; if (v) el.textContent = v; });
     document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = d[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => { const v = d[el.dataset.i18nAlt]; if (v) el.alt = v; });
+    if (touch) document.querySelectorAll('[data-i18n-touch]').forEach(el => { const v = d[el.dataset.i18nTouch]; if (v) el.textContent = v; });
     document.title = d['meta.title'];
+    const md = document.querySelector('meta[name="description"]'); if (md && d['meta.desc']) md.content = d['meta.desc'];
+    cur = l;
     document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
     store.set('lang', l);
     if (window.__snowRelayout) window.__snowRelayout();
   }
   document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
   setLang(guess());
+
+  // ---- sarlavha: aylantirilganda fon ----
+  const top = document.querySelector('.top');
+  const onScroll = () => top.classList.toggle('scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // ---- telefonda: .exe o'rniga "kompyuterda oching" ----
+  if (touch) {
+    document.querySelectorAll('.dl-mobile').forEach(m => {
+      m.hidden = false;
+      const f = m.closest('.feature-text');
+      f.querySelector('.dl').hidden = true; f.querySelector('.dl-note').hidden = true;
+      const btn = m.querySelector('.dl-send');
+      btn.addEventListener('click', async () => {
+        const url = location.origin + '/#works';
+        try {
+          if (navigator.share) { await navigator.share({ title: document.title, url }); return; }
+          await navigator.clipboard.writeText(url);
+          const t = btn.textContent; btn.textContent = window.I18N[cur]['dl.copied'];
+          setTimeout(() => { btn.textContent = t; }, 2000);
+        } catch (e) {}
+      });
+    });
+  }
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

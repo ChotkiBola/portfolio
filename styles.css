@@ -182,3 +182,62 @@ a { color: inherit; }
 .feature-text p.dl-note { font-size: 13px; color: var(--mist); margin: 10px 0 0; }
 .ig { font: 700 20px/1.2 var(--display); color: var(--snow); text-decoration: none; }
 .ig:hover { color: var(--amber); }
+
+/* ================= kritikadan keyingi tuzatishlar ================= */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+[hidden] { display: none !important; }
+
+/* sarlavha: aylantirilganda xira-shaffof fon */
+.top { transition: background .25s, box-shadow .25s; }
+.top.scrolled { background: rgba(9, 15, 34, .82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(255, 255, 255, .07); }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.lang button { min-height: 38px; min-width: 44px; }
+.brand { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* telefonda ham bo'limlarga o'tish: logo ostida gorizontal qator */
+@media (max-width: 760px) {
+  .top { flex-wrap: wrap; gap: 0 16px; padding-top: 8px; padding-bottom: 0; background: rgba(9, 15, 34, .82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .nav { display: flex; order: 3; width: 100%; gap: 22px; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gut) * -1); padding-inline: var(--gut); width: calc(100% + var(--gut) * 2); }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { white-space: nowrap; font-size: 14px; }
+  html { scroll-padding-top: 104px; }
+}
+html { scroll-padding-top: 76px; }
+
+/* ishlar: kamroq bo'shliq */
+.group { margin-top: clamp(44px, 5.5vw, 72px); }
+.feature { margin-bottom: clamp(40px, 5vw, 64px); }
+
+/* veb-ilovalar: desktop ilovalar bilan bir xil andoza */
+.app { gap: 0; }
+.app-shot { display: block; margin-bottom: 18px; }
+.app:hover img { transform: none; }
+.app-shot:hover img { transform: translateY(-4px); }
+.app-name { margin: 0 0 8px; }
+.app-name::after { content: none; }
+.app-text { margin: 0 0 16px; color: #C9D1E4; }
+.app .dl { margin-top: 20px; }
+
+/* yuklab olish */
+.feature-text p.dl-note { font-size: 14px; color: #BCC6DE; }
+.dl-mobile { margin-top: 24px; padding: 16px 18px; border-radius: 16px; background: rgba(255, 255, 255, .06); }
+.feature-text .dl-mobile p { margin: 0 0 14px; color: var(--snow); font-weight: 600; }
+
+/* aloqa havolalari: belgi + tagchiziq */
+.links { gap: 10px 36px; }
+.links a { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; }
+.links a svg { flex: none; color: var(--amber); width: clamp(24px, 2.6vw, 34px); height: auto; }
+.links a span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat; padding-bottom: 4px; }
+.links a:hover span { background-size: 100% 3px; }
+@media (max-width: 760px) { .links { flex-direction: column; } }
+
+/* telefonda hero: sahna tepada to'liq ko'rinadi, matn uning ostidan boshlanadi */
+@media (max-width: 760px) {
+  .hero { min-height: 0; align-items: flex-start; }
+  .hero-video { display: none; }
+  .hero-art { inset: 0 0 auto 0; height: auto; }
+  .hero-art img { position: static; width: 100%; height: auto; aspect-ratio: 900 / 1166; object-fit: cover; object-position: 50% 0; }
+  .hero-shade { background: linear-gradient(180deg, rgba(9, 15, 34, .5) 0, rgba(9, 15, 34, 0) 34vw, rgba(14, 22, 48, 0) 80vw, rgba(14, 22, 48, .88) 112vw, var(--night) 129vw); }
+  .hero-in { padding-top: 104vw; padding-bottom: 48px; }
+  .hero-title { text-shadow: 0 2px 24px rgba(9, 15, 34, .9); }
+}
