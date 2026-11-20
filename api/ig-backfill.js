@@ -36,7 +36,7 @@ export async function GET(request) {
   if (!expected || given !== expected) {
     return new Response(
       "Forbidden: kalit mos kelmadi. Vercel'dagi IG_VERIFY_TOKEN qiymatini aynan o'zini yozing " +
-        `(siz ${given.length} ta belgi yozdingiz, kerakligi ${expected.length} ta).`,
+        `(siz ${given.length} ta belgi yozdingiz).`,
       { status: 403, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
     );
   }
