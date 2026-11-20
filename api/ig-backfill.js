@@ -111,7 +111,8 @@ export async function GET(request) {
             : await sendMessage(igId, { comment_id: c.id }, rule.dm);
           item.dm = dm.ok;
           if (!dm.ok) item.dmError = dm.json?.error?.message;
-          const pub = await igPost(`/${c.id}/replies`, { message: pick(rule.publicReplies) });
+          const text = dm.ok ? pick(rule.publicReplies) : rule.dmFailedReply || "DM'ga yozing, linkni yuboraman 📩";
+          const pub = await igPost(`/${c.id}/replies`, { message: text });
           item.reply = pub.ok;
         } else {
           const pub = await igPost(`/${c.id}/replies`, { message: rule.lateReply || "DM'ga yozing, linkni yuboraman 📩" });

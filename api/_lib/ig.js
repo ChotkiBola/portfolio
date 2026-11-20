@@ -33,13 +33,13 @@ export async function igGet(path) {
   return { ok: res.ok, json };
 }
 
-// Xabar yuborish: avval akkaunt ID orqali, ishlamasa /me orqali (login turiga qarab biri ishlaydi).
+// Xabar yuborish (Unified login'da faqat akkaunt ID orqali ishlaydi; /me ishlamaydi).
 export async function sendRaw(igId, recipient, message) {
-  const body = { recipient, message };
-  const first = await igPost(`/${igId}/messages`, body);
-  if (first.ok) return first;
-  return igPost('/me/messages', body);
+  return igPost(`/${igId}/messages`, { recipient, message });
 }
+
+// Meta so'rovlar limiti: bu holatda qayta urinish faqat limitni uzaytiradi.
+export const isRateLimited = (r) => [4, 17, 32, 613].includes(r?.json?.error?.code);
 
 export const sendMessage = (igId, recipient, text) => sendRaw(igId, recipient, { text });
 
@@ -49,7 +49,7 @@ export async function sendGate(igId, recipient, rule) {
     text: rule.gateText,
     quick_replies: [{ content_type: 'text', title: rule.gateButton, payload: `CHECK:${rule.name}` }],
   });
-  if (withButton.ok) return withButton;
+  if (withButton.ok || isRateLimited(withButton)) return withButton;
   return sendMessage(igId, recipient, `${rule.gateText}\n\nObuna bo'lgach, shu yerga "tayyor" deb yozing.`);
 }
 

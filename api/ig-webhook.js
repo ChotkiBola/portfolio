@@ -47,9 +47,13 @@ async function handleComment(igId, c) {
   if (!rule) return;
   // Izohga shaxsiy javobda obunani tekshirib bo'lmaydi: odam hali yozishmagan.
   // Shuning uchun obuna sharti bo'lsa, avval tugma yuboramiz; tugmani bosganda tekshiramiz.
-  if (rule.followersOnly) await sendGate(igId, { comment_id: c.id }, { ...rule, gateText: rule.commentText });
-  else await sendMessage(igId, { comment_id: c.id }, rule.dm);
-  await igPost(`/${c.id}/replies`, { message: pick(rule.publicReplies) });
+  const dm = rule.followersOnly
+    ? await sendGate(igId, { comment_id: c.id }, { ...rule, gateText: rule.commentText })
+    : await sendMessage(igId, { comment_id: c.id }, rule.dm);
+  // DM yetib bormasa, "yubordim" deb yolg'on yozmaymiz: o'zi DM'ga yozishini so'raymiz.
+  const text = dm.ok ? pick(rule.publicReplies) : rule.dmFailedReply || "DM'ga yozing, linkni yuboraman 📩";
+  log('comment_result', { dm: dm.ok, error: dm.ok ? undefined : dm.json?.error?.message });
+  await igPost(`/${c.id}/replies`, { message: text });
 }
 
 // DM: kalit so'z bo'lsa tayyor javob, bo'lmasa jim turamiz (odamga o'zingiz javob berasiz).
