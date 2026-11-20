@@ -3,6 +3,7 @@
 // Ishlatish (brauzerda oching):
 //   .../api/ig-backfill?key=<IG_VERIFY_TOKEN>          -> faqat ro'yxat, hech narsa yuborilmaydi
 //   .../api/ig-backfill?key=<IG_VERIFY_TOKEN>&run=1    -> javoblarni haqiqatan yuboradi
+// Bundan tashqari Vercel Cron har kuni 11:00 da (Toshkent) o'zi ishga tushiradi.
 // Qo'shimcha: &posts=25 (nechta oxirgi post), &limit=20 (bir martada nechta javob)
 //
 // Instagram qoidasi: izohga shaxsiy xabarni faqat 7 kun ichida yuborish mumkin.
@@ -33,14 +34,16 @@ export async function GET(request) {
   const url = new URL(request.url);
   const expected = (process.env.IG_VERIFY_TOKEN || '').trim();
   const given = (url.searchParams.get('key') || '').trim();
-  if (!expected || given !== expected) {
+  // Vercel Cron har kuni o'zi chaqiradi (vercel.json). Bu so'rov faqat javobsiz izohlarga javob beradi.
+  const fromCron = (request.headers.get('user-agent') || '').startsWith('vercel-cron');
+  if (!fromCron && (!expected || given !== expected)) {
     return new Response(
       "Forbidden: kalit mos kelmadi. Vercel'dagi IG_VERIFY_TOKEN qiymatini aynan o'zini yozing " +
         `(siz ${given.length} ta belgi yozdingiz).`,
       { status: 403, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
     );
   }
-  const run = url.searchParams.get('run') === '1';
+  const run = fromCron || url.searchParams.get('run') === '1';
   const posts = Math.min(Number(url.searchParams.get('posts')) || 25, 50);
   const limit = Math.min(Number(url.searchParams.get('limit')) || 20, 40);
   const igId = process.env.IG_USER_ID || '17841439662462785';
