@@ -4,6 +4,9 @@
 // publicReplies - izoh ostiga ochiq javob (har safar tasodifiy biri tanlanadi, bir xil bo'lib ko'rinmasin)
 // dm            - shaxsiy xabar (izoh yozganga ham, DM yozganga ham shu boradi)
 // enabled       - false bo'lsa, qoida o'chiq
+// followersOnly - true bo'lsa, link faqat obunachilarga beriladi
+// commentText   - izoh yozganga birinchi xabar ("Obuna bo'ldim" tugmasi bilan)
+// gateText      - obuna bo'lmagan odamga xabar
 
 const SITE = 'https://portfolio-nine-tau-3q07doew23.vercel.app';
 
@@ -13,6 +16,13 @@ export const RULES = [
     enabled: true,
     // Faqat aniq kalit so'z: "link" kabi umumiy so'zlar boshqa reelslarda ham yozilsa, noto'g'ri link ketib qoladi.
     keywords: ['osmon', 'осмон'],
+    followersOnly: true,
+    gateButton: "Obuna bo'ldim ✅",
+    commentText:
+      "Salom! Osmon linkini obunachilarimga yuboraman 🙂\n\n" +
+      "@vaybbloger'ga obuna bo'ling va pastdagi \"Obuna bo'ldim ✅\" tugmasini bosing.",
+    gateText:
+      "Hali obuna bo'lmagansiz 🙂 @vaybbloger'ga obuna bo'ling, keyin \"Obuna bo'ldim ✅\" tugmasini qayta bosing.",
     publicReplies: [
       "DM'ga yubordim 📩",
       "Yubordim, DM'ni tekshiring 🙌",
@@ -69,4 +79,19 @@ export function matchRule(text) {
 
 export function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
+}
+
+export function ruleByName(name) {
+  return RULES.find((r) => r.enabled && r.name === name) || null;
+}
+
+// "Obuna bo'ldim" tugmasi ishlamagan holatda odam shunday yozishi mumkin.
+const READY = ['tayyor', "bo'ldim", 'boldim', 'obuna', 'готово'];
+export function isReadyWord(text) {
+  const ws = words(text);
+  return ws.length <= 4 && ws.some((w) => READY.map(normalize).includes(w));
+}
+
+export function defaultGatedRule() {
+  return RULES.find((r) => r.enabled && r.followersOnly) || null;
 }
