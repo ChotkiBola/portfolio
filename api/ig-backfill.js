@@ -48,6 +48,9 @@ export async function GET(request) {
     );
   }
   const run = fromCron || url.searchParams.get('run') === '1';
+  // Faqat DM'ni qayta urinish (ochiq javob allaqachon yozilgan izohlar uchun). Instagram bir izohga bitta DM'ga ruxsat beradi,
+  // shuning uchun avval yetib borgan bo'lsa, qayta urinish shunchaki xato qaytaradi.
+  const retryDm = url.searchParams.get('retrydm') === '1';
   const started = Date.now();
   const posts = Math.min(Number(url.searchParams.get('posts')) || 15, 50);
   const limit = Math.min(Number(url.searchParams.get('limit')) || 20, 40);
@@ -80,9 +83,17 @@ export async function GET(request) {
       const replied = (c.replies?.data || []).some(
         (r) => r.from?.id === igId || (r.username || '').toLowerCase() === me
       );
+      const fresh = Date.now() - new Date(c.timestamp).getTime() < 7 * DAY;
+      if (replied && retryDm && fresh) {
+        const dm = rule.followersOnly
+          ? await sendGate(igId, { comment_id: c.id }, { ...rule, gateText: rule.commentText })
+          : await sendMessage(igId, { comment_id: c.id }, rule.dm);
+        results.push({ post: m.permalink, user: author, action: 'retry-dm', dm: dm.ok, error: dm.json?.error?.message });
+        await sleep(250);
+        continue;
+      }
       if (replied) continue;
 
-      const fresh = Date.now() - new Date(c.timestamp).getTime() < 7 * DAY;
       const item = { post: m.permalink, user: author, text: c.text, action: fresh ? 'dm+reply' : 'reply-only' };
       if (sent >= limit || Date.now() - started > 45000) {
         item.action = 'keyingi safar';
@@ -95,6 +106,7 @@ export async function GET(request) {
             ? await sendGate(igId, { comment_id: c.id }, { ...rule, gateText: rule.commentText })
             : await sendMessage(igId, { comment_id: c.id }, rule.dm);
           item.dm = dm.ok;
+          if (!dm.ok) item.dmError = dm.json?.error?.message;
           const pub = await igPost(`/${c.id}/replies`, { message: pick(rule.publicReplies) });
           item.reply = pub.ok;
         } else {
