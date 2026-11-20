@@ -25,6 +25,8 @@ export const RULES = [
       "@vaybbloger'ga obuna bo'ling va pastdagi \"Obuna bo'ldim ✅\" tugmasini bosing.",
     gateText:
       "Hali obuna bo'lmagansiz 🙂 @vaybbloger'ga obuna bo'ling, keyin \"Obuna bo'ldim ✅\" tugmasini qayta bosing.",
+    // 7 kundan eski izohlar uchun (Instagram ularga shaxsiy xabar yuborishga ruxsat bermaydi)
+    lateReply: "Kech qoldim 🙏 DM'ga \"osmon\" deb yozing, linkni darhol yuboraman 📩",
     publicReplies: [
       "DM'ga yubordim 📩",
       "Yubordim, DM'ni tekshiring 🙌",
