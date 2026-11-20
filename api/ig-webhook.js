@@ -3,14 +3,18 @@
 //
 // Vercel sozlamalaridagi o'zgaruvchilar (Settings → Environment Variables):
 //   IG_VERIFY_TOKEN  - o'zingiz o'ylab topgan maxfiy so'z, Meta'dagi "Verify token" bilan bir xil
-//   IG_APP_SECRET    - Meta ilovasining Instagram App Secret'i (imzoni tekshirish uchun)
-//   IG_ACCESS_TOKEN  - Instagram akkaunt tokeni (Generate token tugmasi orqali olinadi)
+//   IG_APP_SECRET    - Meta ilovasining App Secret'i: Настройки приложения → Основное (imzoni tekshirish uchun)
+//   IG_ACCESS_TOKEN  - konfiguratsiyadan olingan tizim tokeni (muddati tugamaydi)
+//   IG_API_HOST      - ixtiyoriy, standart: graph.facebook.com
 //   IG_API_VERSION   - ixtiyoriy, standart: v25.0
 
 import crypto from 'node:crypto';
 import { matchRule, pick } from './_lib/rules.js';
 
-const API = () => `https://graph.instagram.com/${process.env.IG_API_VERSION || 'v25.0'}`;
+// Yangi Meta ilovalari "Unified login" ishlatadi: tizim tokeni faqat graph.facebook.com'da ishlaydi.
+// Eski "Instagram login" tokenlari uchun IG_API_HOST=graph.instagram.com qo'yiladi.
+const API = () =>
+  `https://${process.env.IG_API_HOST || 'graph.facebook.com'}/${process.env.IG_API_VERSION || 'v25.0'}`;
 
 function log(event, data = {}) {
   console.log(JSON.stringify({ event, ...data }));
@@ -30,6 +34,14 @@ async function igPost(path, body) {
   return { ok: res.ok, json };
 }
 
+// Xabar yuborish: avval akkaunt ID orqali, ishlamasa /me orqali (login turiga qarab biri ishlaydi).
+async function sendMessage(igId, recipient, text) {
+  const body = { recipient, message: { text } };
+  const first = await igPost(`/${igId}/messages`, body);
+  if (first.ok) return first;
+  return igPost('/me/messages', body);
+}
+
 function validSignature(raw, header) {
   const secret = process.env.IG_APP_SECRET;
   if (!secret || !header) return false;
@@ -46,7 +58,7 @@ async function handleComment(igId, c) {
   const rule = matchRule(c.text);
   log('comment', { user: c.from?.username, rule: rule?.name ?? null });
   if (!rule) return;
-  await igPost(`/${igId}/messages`, { recipient: { comment_id: c.id }, message: { text: rule.dm } });
+  await sendMessage(igId, { comment_id: c.id }, rule.dm);
   await igPost(`/${c.id}/replies`, { message: pick(rule.publicReplies) });
 }
 
@@ -58,7 +70,7 @@ async function handleMessage(igId, m) {
   const rule = matchRule(msg.text);
   log('dm', { rule: rule?.name ?? null });
   if (!rule) return;
-  await igPost(`/${igId}/messages`, { recipient: { id: m.sender.id }, message: { text: rule.dm } });
+  await sendMessage(igId, { id: m.sender.id }, rule.dm);
 }
 
 export async function GET(request) {
