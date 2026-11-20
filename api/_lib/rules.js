@@ -15,7 +15,9 @@ export const RULES = [
     name: 'osmon',
     enabled: true,
     // Faqat aniq kalit so'z: "link" kabi umumiy so'zlar boshqa reelslarda ham yozilsa, noto'g'ri link ketib qoladi.
-    keywords: ['osmon', 'осмон'],
+    keywords: ['osmon', 'осмон', 'qor', 'қор'],
+    // Izoh faqat "+" belgisidan iborat bo'lsa ham ishlaydi ("+", "++", "+ +").
+    plus: true,
     followersOnly: true,
     gateButton: "Obuna bo'ldim ✅",
     commentText:
@@ -70,8 +72,10 @@ function words(text) {
 
 export function matchRule(text) {
   const ws = new Set(words(text));
+  const onlyPlus = /^[\s+]*\+[\s+]*$/.test(String(text));
   for (const rule of RULES) {
     if (!rule.enabled) continue;
+    if (onlyPlus && rule.plus) return rule;
     if (rule.keywords.some((k) => ws.has(normalize(k)))) return rule;
   }
   return null;
