@@ -19,12 +19,16 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function all(path, pages = 3) {
   const out = [];
-  let r = await igGet(path);
+  let r = await igGet(path).catch((e) => ({ ok: false, json: { error: { message: e.message } } }));
   for (let i = 0; i < pages && r.ok; i++) {
     out.push(...(r.json.data || []));
     const next = r.json.paging?.next;
     if (!next) break;
-    const res = await fetch(next, { headers: { Authorization: `Bearer ${process.env.IG_ACCESS_TOKEN}` } });
+    const res = await fetch(next, {
+      signal: AbortSignal.timeout(10000),
+      headers: { Authorization: `Bearer ${process.env.IG_ACCESS_TOKEN}` },
+    }).catch(() => null);
+    if (!res) break;
     r = { ok: res.ok, json: await res.json().catch(() => ({})) };
   }
   return { ok: r.ok, data: out, error: r.json?.error?.message };
@@ -44,7 +48,8 @@ export async function GET(request) {
     );
   }
   const run = fromCron || url.searchParams.get('run') === '1';
-  const posts = Math.min(Number(url.searchParams.get('posts')) || 25, 50);
+  const started = Date.now();
+  const posts = Math.min(Number(url.searchParams.get('posts')) || 15, 50);
   const limit = Math.min(Number(url.searchParams.get('limit')) || 20, 40);
   const igId = process.env.IG_USER_ID || '17841439662462785';
   const me = (process.env.IG_USERNAME || 'vaybbloger').toLowerCase();
@@ -54,10 +59,15 @@ export async function GET(request) {
 
   const results = [];
   let sent = 0;
-  for (const m of media.data.slice(0, posts)) {
-    const comments = await all(
-      `/${m.id}/comments?fields=id,text,timestamp,username,from{id,username},replies{username,from{id}}&limit=50`
-    );
+  // Izohlarni hamma postlardan bir vaqtda olamiz (ketma-ket olish 60 soniyaga sig'maydi).
+  const list = media.data.slice(0, posts);
+  const allComments = await Promise.all(
+    list.map((m) =>
+      all(`/${m.id}/comments?fields=id,text,timestamp,username,from{id,username},replies{username,from{id}}&limit=50`, 2)
+    )
+  );
+  for (const [i, m] of list.entries()) {
+    const comments = allComments[i];
     if (!comments.ok) {
       results.push({ post: m.permalink, error: comments.error });
       continue;
@@ -74,7 +84,7 @@ export async function GET(request) {
 
       const fresh = Date.now() - new Date(c.timestamp).getTime() < 7 * DAY;
       const item = { post: m.permalink, user: author, text: c.text, action: fresh ? 'dm+reply' : 'reply-only' };
-      if (sent >= limit) {
+      if (sent >= limit || Date.now() - started > 45000) {
         item.action = 'keyingi safar';
         results.push(item);
         continue;
@@ -91,7 +101,7 @@ export async function GET(request) {
           const pub = await igPost(`/${c.id}/replies`, { message: rule.lateReply || "DM'ga yozing, linkni yuboraman 📩" });
           item.reply = pub.ok;
         }
-        await sleep(400);
+        await sleep(250);
       }
       sent++;
       results.push(item);

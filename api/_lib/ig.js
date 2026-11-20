@@ -11,6 +11,7 @@ export function log(event, data = {}) {
 export async function igPost(path, body) {
   const res = await fetch(`${API()}${path}`, {
     method: 'POST',
+    signal: AbortSignal.timeout(10000),
     headers: {
       Authorization: `Bearer ${process.env.IG_ACCESS_TOKEN}`,
       'Content-Type': 'application/json',
@@ -24,6 +25,7 @@ export async function igPost(path, body) {
 
 export async function igGet(path) {
   const res = await fetch(`${API()}${path}`, {
+    signal: AbortSignal.timeout(10000),
     headers: { Authorization: `Bearer ${process.env.IG_ACCESS_TOKEN}` },
   });
   const json = await res.json().catch(() => ({}));
