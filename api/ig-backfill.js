@@ -31,8 +31,14 @@ async function all(path, pages = 3) {
 
 export async function GET(request) {
   const url = new URL(request.url);
-  if (!process.env.IG_VERIFY_TOKEN || url.searchParams.get('key') !== process.env.IG_VERIFY_TOKEN) {
-    return new Response('Forbidden', { status: 403 });
+  const expected = (process.env.IG_VERIFY_TOKEN || '').trim();
+  const given = (url.searchParams.get('key') || '').trim();
+  if (!expected || given !== expected) {
+    return new Response(
+      "Forbidden: kalit mos kelmadi. Vercel'dagi IG_VERIFY_TOKEN qiymatini aynan o'zini yozing " +
+        `(siz ${given.length} ta belgi yozdingiz, kerakligi ${expected.length} ta).`,
+      { status: 403, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
+    );
   }
   const run = url.searchParams.get('run') === '1';
   const posts = Math.min(Number(url.searchParams.get('posts')) || 25, 50);
