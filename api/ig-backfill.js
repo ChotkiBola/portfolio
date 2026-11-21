@@ -73,6 +73,19 @@ export async function GET(request) {
       all(`/${m.id}/comments?fields=id,text,timestamp,username,from{id,username},replies{username,from{id}}&limit=50`, 2)
     )
   );
+  // &debug=1: oxirgi izohlarni ko'rsatadi (kalit so'z topilmasa sababini ko'rish uchun)
+  if (url.searchParams.get('debug') === '1') {
+    const rows = list.slice(0, 5).map((m, i) => ({
+      post: m.permalink,
+      comments: (allComments[i].data || []).slice(0, 30).map((c) => ({
+        user: c.from?.username || c.username, text: c.text, at: c.timestamp,
+        rule: matchRule(c.text)?.name || null,
+        replied: (c.replies?.data || []).some((r) => r.from?.id === igId || (r.username || '').toLowerCase() === me),
+      })),
+      error: allComments[i].error,
+    }));
+    return Response.json({ ok: true, debug: rows });
+  }
   for (const [i, m] of list.entries()) {
     const comments = allComments[i];
     if (!comments.ok) {
