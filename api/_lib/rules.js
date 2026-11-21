@@ -45,6 +45,8 @@ export const RULES = [
     name: 'qollanma',
     enabled: true,
     keywords: ["qo'llanma", 'qollanma', 'қўлланма', 'кулланма'],
+    // Xato yozilganlar ham ushlanadi: "qo'lanma", "коллнма", "qullanma", "qollanmani"...
+    fuzzy: 'kollanma',
     followersOnly: true,
     gateButton: "Obuna bo'ldim ✅",
     commentText:
@@ -95,6 +97,26 @@ function words(text) {
   return normalize(text).split(/[^a-z0-9']+/).filter(Boolean);
 }
 
+// q/k, o/u, apostrof va qo'sh harflar farqini yo'qotamiz: "qo'lanma" ~ "коллнма" ~ "kollanma"
+function skeleton(w) {
+  return w.replace(/'/g, '').replace(/q/g, 'k').replace(/u/g, 'o').replace(/(.)\1+/g, '$1');
+}
+function editDistance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+function fuzzyHit(word, target) {
+  if (word.length < 5) return false;
+  const w = skeleton(word), t = skeleton(target);
+  // qo'shimchalar: "qo'llanmani", "qo'llanmaga"
+  const stems = [w, w.replace(/(ni|ga|si|lar|ni)$/, '')];
+  return stems.some((s) => editDistance(s, t) <= (t.length >= 6 ? 2 : 1));
+}
+
 export function matchRule(text) {
   const ws = new Set(words(text));
   const onlyPlus = /^[\s+]*\+[\s+]*$/.test(String(text));
@@ -102,6 +124,7 @@ export function matchRule(text) {
     if (!rule.enabled) continue;
     if (onlyPlus && rule.plus) return rule;
     if (rule.keywords.some((k) => ws.has(normalize(k)))) return rule;
+    if (rule.fuzzy && [...ws].some((w) => fuzzyHit(w, rule.fuzzy))) return rule;
   }
   return null;
 }
