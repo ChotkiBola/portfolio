@@ -42,6 +42,30 @@ export const RULES = [
       `Yoqsa, do'stlaringizga ham ulashing 🙌`,
   },
   {
+    name: 'qollanma',
+    enabled: true,
+    keywords: ["qo'llanma", 'qollanma', 'қўлланма', 'кулланма'],
+    followersOnly: true,
+    gateButton: "Obuna bo'ldim ✅",
+    commentText:
+      "Salom! Instagram skillari qo'llanmasini obunachilarimga yuboraman 🙂\n\n" +
+      "@vaybbloger'ga obuna bo'ling va pastdagi \"Obuna bo'ldim ✅\" tugmasini bosing.",
+    gateText:
+      "Hali obuna bo'lmagansiz 🙂 @vaybbloger'ga obuna bo'ling, keyin \"Obuna bo'ldim ✅\" tugmasini qayta bosing.",
+    dmFailedReply: "Sizga DM yoza olmadik 🙏 Iltimos, o'zingiz DM'ga \"qo'llanma\" deb yozing, darhol yuboraman 📩",
+    lateReply: "Kech qoldim 🙏 DM'ga \"qo'llanma\" deb yozing, darhol yuboraman 📩",
+    publicReplies: ["DM'ga yubordim 📩", "Yubordim, DM'ni tekshiring 🙌", "Qo'llanma DM'da 📩"],
+    dm:
+      "Mana Claude uchun 13 ta Instagram skill (bepul) 👇\n" +
+      "https://github.com/Jakeschincariol/instagram-agent-skill\n\n" +
+      "O'rnatish (eng osoni):\n" +
+      "1. claude.ai yoki Claude ilovasini oching\n" +
+      "2. Shu linkni yuboring va yozing: \"Install this skill, then confirm /ig-reel works.\"\n" +
+      "3. Tayyor! /ig-profile, /ig-reel, /ig-plan deb yozib ishlating.\n\n" +
+      "Claude Code'da: /plugin marketplace add Jakeschincariol/instagram-agent-skill\n\n" +
+      "Savol bo'lsa shu yerga yozing 🙌",
+  },
+  {
     // Kurs tayyor bo'lganda: enabled: true qiling va dm matnini almashtiring.
     name: 'kurs',
     enabled: false,
@@ -67,7 +91,8 @@ const CYR = {
 };
 
 export function normalize(text = '') {
-  return [...String(text).toLowerCase()].map((c) => CYR[c] ?? c).join('');
+  // O'zbekcha apostrof variantlari (ʻ ’ ` ‘) bitta oddiy ' ga keltiriladi
+  return [...String(text).toLowerCase().replace(/[ʻʼ’‘`´]/g, "'")].map((c) => CYR[c] ?? c).join('');
 }
 
 function words(text) {
