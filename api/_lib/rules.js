@@ -56,13 +56,9 @@ export const RULES = [
     lateReply: "Kech qoldim 🙏 DM'ga \"qo'llanma\" deb yozing, darhol yuboraman 📩",
     publicReplies: ["DM'ga yubordim 📩", "Yubordim, DM'ni tekshiring 🙌", "Qo'llanma DM'da 📩"],
     dm:
-      "Mana Claude uchun 13 ta Instagram skill (bepul) 👇\n" +
-      "https://github.com/Jakeschincariol/instagram-agent-skill\n\n" +
-      "O'rnatish (eng osoni):\n" +
-      "1. claude.ai yoki Claude ilovasini oching\n" +
-      "2. Shu linkni yuboring va yozing: \"Install this skill, then confirm /ig-reel works.\"\n" +
-      "3. Tayyor! /ig-profile, /ig-reel, /ig-plan deb yozib ishlating.\n\n" +
-      "Claude Code'da: /plugin marketplace add Jakeschincariol/instagram-agent-skill\n\n" +
+      "Mana va'da qilingan qo'llanma 👇\n" +
+      `${SITE}/qollanma/\n\n` +
+      "Ichida: 13 ta skill nima qilishi, yuklab olish fayllari va claude.ai'ga 5 daqiqada o'rnatish qadamlari.\n\n" +
       "Savol bo'lsa shu yerga yozing 🙌",
   },
   {

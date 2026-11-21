@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instagram skillari: o'rnatish qo'llanmasi</title>
+<meta name="description" content="Claude uchun 13 ta bepul Instagram skill: nima qiladi va qanday o'rnatiladi. O'zbekcha qo'llanma.">
+<meta property="og:title" content="Claude uchun 13 ta Instagram skill: o'rnatish qo'llanmasi">
+<meta property="og:description" content="Profil tahlili, reels ssenariysi, caption, haftalik kontent plan. Bepul, 5 daqiqada o'rnatiladi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0E1630; --deep: #090F22; --panel: #151E40; --line: rgba(255,255,255,.10);
+    --snow: #F3F6FB; --mist: #A9B4D0; --amber: #FFB547; --red: #FF5A4E; --tile: #2EC4B6;
+    --display: "Unbounded", system-ui, sans-serif; --body: "Manrope", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--night); color: var(--snow); font: 400 17px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--amber); }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+  main { max-width: 720px; margin: 0 auto; padding: 0 16px 80px; }
+
+  header { padding: 56px 0 28px; }
+  .by { display: inline-flex; align-items: center; gap: 10px; color: var(--mist); font-size: 15px; text-decoration: none; }
+  .by img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; }
+  h1 { font: 800 clamp(28px, 7vw, 44px)/1.12 var(--display); margin: 22px 0 14px; letter-spacing: -.01em; }
+  h1 em { font-style: normal; color: var(--amber); }
+  .lead { color: var(--mist); font-size: 18px; margin: 0; max-width: 34em; }
+
+  h2 { font: 700 22px/1.25 var(--display); margin: 48px 0 6px; }
+  .sub { color: var(--mist); margin: 0 0 18px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .cmd { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .cmd code { font: 600 15px/1 ui-monospace, "SFMono-Regular", Menlo, monospace; color: var(--amber); }
+  .cmd p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--snow); }
+
+  .route { border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px; margin-top: 16px; background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)); }
+  .route h3 { font: 700 18px/1.3 var(--display); margin: 0 0 4px; }
+  .route .who { color: var(--mist); margin: 0 0 14px; font-size: 15px; }
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; }
+  ol.steps > li { counter-increment: s; position: relative; padding: 0 0 18px 44px; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--red); color: #fff; font: 700 15px/30px var(--body); text-align: center; }
+  ol.steps > li:last-child { padding-bottom: 0; }
+  .path { font-weight: 700; color: var(--snow); background: rgba(255,255,255,.08); padding: 1px 7px; border-radius: 6px; white-space: nowrap; }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; font: 700 16px/1 var(--body); text-decoration: none; color: #1b1205; background: var(--amber); padding: 14px 18px; border-radius: 12px; margin: 8px 0 4px; }
+  .btn.ghost { background: transparent; color: var(--snow); border: 1px solid var(--line); }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; color: var(--mist); font-size: 15px; }
+  .zips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .zips a { font: 600 14px/1 ui-monospace, Menlo, monospace; text-decoration: none; color: var(--snow); background: var(--panel); border: 1px solid var(--line); padding: 9px 11px; border-radius: 10px; }
+
+  .code { position: relative; margin: 10px 0 4px; }
+  .code pre { margin: 0; background: var(--deep); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; padding-right: 92px; overflow-x: auto; font: 500 14px/1.6 ui-monospace, Menlo, monospace; color: var(--snow); white-space: pre; }
+  .code button { position: absolute; top: 8px; right: 8px; font: 700 13px/1 var(--body); color: var(--night); background: var(--snow); border: 0; border-radius: 8px; padding: 9px 11px; cursor: pointer; }
+
+  .note { border-left: 3px solid var(--tile); padding: 4px 0 4px 16px; margin: 18px 0; color: var(--mist); }
+  .note b { color: var(--snow); }
+
+  footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--mist); font-size: 15px; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 18px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <a class="by" href="https://instagram.com/vaybbloger"><img src="me.jpg" alt="" width="36" height="36">Anvar Zarifov · @vaybbloger</a>
+    <h1>Claude uchun 13 ta <em>Instagram skill</em>: o'rnatish qo'llanmasi</h1>
+    <p class="lead">Profilingizni tahlil qiladi, reels ssenariysini yozadi, caption tuzadi, haftalik kontent plan beradi. Bepul, o'rnatish 5 daqiqa.</p>
+  </header>
+
+  <section>
+    <h2>Nimalar qila oladi</h2>
+    <p class="sub">Claude'ga shu buyruqlardan birini yozasiz, u ishni bajaradi. Hech narsa o'zi joylanmaydi: skill yozadi, joylashni o'zingiz qilasiz.</p>
+    <div class="grid">
+      <div class="cmd"><code>/ig-profile</code><p>Profilingizni 100 balldan baholaydi va bio'ni qayta yozadi.</p></div>
+      <div class="cmd"><code>/ig-reel</code><p>G'oyadan reels: 3 ta hook, ssenariy, ekrandagi matn.</p></div>
+      <div class="cmd"><code>/ig-caption</code><p>Caption yozadi, "... ko'proq"gacha ko'rinadigan qismini tekshiradi.</p></div>
+      <div class="cmd"><code>/ig-plan</code><p>Haftalik plan: nima, qaysi formatda, qachon joylash.</p></div>
+      <div class="cmd"><code>/ig-viral</code><p>Sohangizda hozir ishlayotgan reelslarni topib, sababini aytadi.</p></div>
+      <div class="cmd"><code>/ig-audit</code><p>Joylagan postlaringizni tahlil qiladi: nima ishladi, nima yo'q.</p></div>
+      <div class="cmd"><code>/ig-story</code><p>Kunlik stories ketma-ketligi va qaysi stiker qayerga.</p></div>
+      <div class="cmd"><code>/ig-carousel</code><p>Karusel: muqova, slaydlar matni va rasmlari.</p></div>
+      <div class="cmd"><code>/ig-reply</code><p>Postingiz ostidagi izohlarga javoblar tayyorlaydi.</p></div>
+      <div class="cmd"><code>/ig-dm</code><p>DM matnlari: kalit so'z javobi, hamkorlik taklifi.</p></div>
+      <div class="cmd"><code>/ig-comment</code><p>Boshqalarning postiga bot bo'lib ko'rinmaydigan izohlar.</p></div>
+      <div class="cmd"><code>/ig-repurpose</code><p>Bitta uzun videodan bir haftalik reels va karusellar.</p></div>
+      <div class="cmd"><code>/ig-human</code><p>Matndan "AI hidi"ni tozalaydi, tabiiy qiladi.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O'rnatish</h2>
+    <p class="sub">O'zingizga mos yo'lni tanlang.</p>
+
+    <div class="route">
+      <h3>1-yo'l: claude.ai yoki Claude ilovasi</h3>
+      <p class="who">Ko'pchilik uchun shu. Bepul tarifda ham ishlaydi.</p>
+      <ol class="steps">
+        <li>Skillarni yuklab oling:
+          <br><a class="btn" href="ig-skills-hammasi.zip" download>Hammasini yuklab olish (13 ta skill)</a>
+          <br>Faylni oching (unzip). Ichida 13 ta alohida <span class="path">.zip</span> fayl bor, ularni ochmang, o'zini yuklaysiz.
+          <details><summary>Yoki bittalab yuklab oling</summary>
+            <div class="zips">
+              <a href="skills/ig-profile.zip" download>ig-profile</a><a href="skills/ig-reel.zip" download>ig-reel</a><a href="skills/ig-caption.zip" download>ig-caption</a>
+              <a href="skills/ig-plan.zip" download>ig-plan</a><a href="skills/ig-viral.zip" download>ig-viral</a><a href="skills/ig-audit.zip" download>ig-audit</a>
+              <a href="skills/ig-story.zip" download>ig-story</a><a href="skills/ig-carousel.zip" download>ig-carousel</a><a href="skills/ig-reply.zip" download>ig-reply</a>
+              <a href="skills/ig-dm.zip" download>ig-dm</a><a href="skills/ig-comment.zip" download>ig-comment</a><a href="skills/ig-repurpose.zip" download>ig-repurpose</a>
+              <a href="skills/ig-human.zip" download>ig-human</a>
+            </div>
+          </details>
+        </li>
+        <li>claude.ai'da <span class="path">Settings → Capabilities</span> ga kiring va <b>Code execution</b> (yoki "Create and edit files") ni yoqing. Skillar shusiz ishlamaydi.</li>
+        <li><span class="path">Customize → Skills</span> ga o'ting, <b>+</b> tugmasini bosib, skill yuklash variantini tanlang.</li>
+        <li>Bitta <span class="path">.zip</span> faylni yuklang. Har bir skill uchun shuni takrorlang. Boshlash uchun eng kerakli uchtasi yetadi: <b>ig-profile</b>, <b>ig-reel</b>, <b>ig-plan</b>.</li>
+        <li>Yangi chat oching va yozing: <span class="path">/ig-profile</span> va Instagram profilingiz linki.</li>
+      </ol>
+      <p class="note">Skill yuklash kompyuterda (brauzer yoki desktop ilova) qulayroq. Yuklab bo'lgach, telefondagi Claude ilovasida ham ishlataverasiz.</p>
+    </div>
+
+    <div class="route">
+      <h3>2-yo'l: Claude Code</h3>
+      <p class="who">Kompyuterda Claude Code ishlatsangiz.</p>
+      <ol class="steps">
+        <li>Plagin sifatida o'rnating:
+          <div class="code"><pre>/plugin marketplace add Jakeschincariol/instagram-agent-skill
+/plugin install instagram-agent</pre><button type="button" data-copy>Nusxa</button></div>
+        </li>
+        <li>Yoki terminalda qo'lda:
+          <div class="code"><pre>git clone https://github.com/Jakeschincariol/instagram-agent-skill.git
+cp -r instagram-agent-skill/skills/ig-* ~/.claude/skills/</pre><button type="button" data-copy>Nusxa</button></div>
+        </li>
+        <li>Claude Code'da <span class="path">/ig-reel</span> deb yozib tekshiring.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2>Birinchi 10 daqiqa</h2>
+    <p class="sub">Natija yaxshi chiqishi uchun shu ikki qadamni qiling.</p>
+    <ol class="steps">
+      <li><b>Ovozingizni o'rgating.</b> Claude'ga o'zingizning 3 ta reelsingiz matnini yuboring va yozing:
+        <div class="code"><pre>Mana mening 3 ta reelsim matni. Shulardan voice.md yozib ber, keyingi ssenariylar shu uslubda bo'lsin.</pre><button type="button" data-copy>Nusxa</button></div>
+        Shunda ssenariylar siz gapiradigan tilda chiqadi. <a href="voice.md" download>voice.md namunasi</a>
+      </li>
+      <li><b>Profildan boshlang:</b> <span class="path">/ig-profile</span>, keyin <span class="path">/ig-plan</span>. Plan tayyor bo'lgach, har bir post uchun <span class="path">/ig-reel</span> va <span class="path">/ig-caption</span>.</li>
+    </ol>
+    <p class="note"><b>Bilib qo'ying:</b> hook va matnni baholaydigan vositalar ingliz tili uchun sozlangan. O'zbekcha matnda ballarni taxminiy deb qabul qiling, ssenariy va g'oyalar esa o'zbekcha yaxshi ishlaydi.</p>
+  </section>
+
+  <footer>
+    Savol bo'lsa, Instagram'da DM yozing, yordam beraman.
+    <div class="links">
+      <a class="btn" href="https://instagram.com/vaybbloger">@vaybbloger'ga obuna bo'lish</a>
+      <a class="btn ghost" href="https://t.me/hisperspective">Telegram</a>
+    </div>
+    Skillar muallifi: Jake Schincariol, <a href="https://github.com/Jakeschincariol/instagram-agent-skill">GitHub</a>, MIT litsenziya. Qo'llanma: Anvar Zarifov.
+  </footer>
+</main>
+<script>
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.previousElementSibling.textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+        b.textContent = 'Nusxalandi'; setTimeout(function () { b.textContent = 'Nusxa'; }, 1600);
+      }, function () { b.textContent = 'Belgilab oling'; });
+    });
+  });
+</script>
+</body>
+</html>
