@@ -6,7 +6,7 @@
 <title>Instagram skillari: o'rnatish qo'llanmasi</title>
 <meta name="description" content="Claude uchun 13 ta bepul Instagram skill: nima qiladi va qanday o'rnatiladi. O'zbekcha qo'llanma.">
 <meta property="og:title" content="Claude uchun 13 ta Instagram skill: o'rnatish qo'llanmasi">
-<meta property="og:description" content="Profil tahlili, reels ssenariysi, caption, haftalik kontent plan. Bepul, 5 daqiqada o'rnatiladi.">
+<meta property="og:description" content="Profil tahlili, reels ssenariysi, caption, haftalik kontent plan. Bitta faylni Claude'ga tashlaysiz.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
@@ -49,6 +49,7 @@
   .btn { display: inline-flex; align-items: center; gap: 8px; font: 700 16px/1 var(--body); text-decoration: none; color: #1b1205; background: var(--amber); padding: 14px 18px; border-radius: 12px; margin: 8px 0 4px; }
   .btn.ghost { background: transparent; color: var(--snow); border: 1px solid var(--line); }
   details { margin-top: 8px; }
+  details[open] > summary { margin-bottom: 4px; }
   summary { cursor: pointer; color: var(--mist); font-size: 15px; }
   .zips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
   .zips a { font: 600 14px/1 ui-monospace, Menlo, monospace; text-decoration: none; color: var(--snow); background: var(--panel); border: 1px solid var(--line); padding: 9px 11px; border-radius: 10px; }
@@ -57,6 +58,7 @@
   .code pre { margin: 0; background: var(--deep); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; padding-right: 92px; overflow-x: auto; font: 500 14px/1.6 ui-monospace, Menlo, monospace; color: var(--snow); white-space: pre; }
   .code button { position: absolute; top: 8px; right: 8px; font: 700 13px/1 var(--body); color: var(--night); background: var(--snow); border: 0; border-radius: 8px; padding: 9px 11px; cursor: pointer; }
 
+  .code.ask pre { white-space: pre-wrap; font-family: var(--body); font-size: 15px; }
   .note { border-left: 3px solid var(--tile); padding: 4px 0 4px 16px; margin: 18px 0; color: var(--mist); }
   .note b { color: var(--snow); }
 
@@ -68,13 +70,30 @@
 <main>
   <header>
     <a class="by" href="https://instagram.com/vaybbloger"><img src="me.jpg" alt="" width="36" height="36">Anvar Zarifov · @vaybbloger</a>
-    <h1>Claude uchun 13 ta <em>Instagram skill</em>: o'rnatish qo'llanmasi</h1>
-    <p class="lead">Profilingizni tahlil qiladi, reels ssenariysini yozadi, caption tuzadi, haftalik kontent plan beradi. Bepul, o'rnatish 5 daqiqa.</p>
+    <h1>Claude uchun <em>Instagram yordamchi</em>: bitta fayl, 13 ta skill</h1>
+    <p class="lead">Profilingizni tahlil qiladi, reels ssenariysini yozadi, caption tuzadi, haftalik kontent plan beradi. Bitta faylni Claude'ga tashlaysiz, xolos. Bepul.</p>
   </header>
 
   <section>
+    <h2>3 qadam, tamom</h2>
+    <p class="sub">Hech narsa o'rnatish shart emas. Telefonda ham ishlaydi.</p>
+    <ol class="steps">
+      <li><b>Faylni yuklab oling.</b>
+        <br><a class="btn" href="instagram-yordamchi.md" download>Instagram yordamchi faylini yuklab olish</a>
+      </li>
+      <li><b>Claude'ga tashlang.</b> claude.ai yoki Claude ilovasida yangi chat oching, <span class="path">+</span> yoki 📎 tugmasini bosib, shu faylni biriktiring.</li>
+      <li><b>Nima kerakligini yozing.</b> Masalan:
+        <div class="code ask"><pre>Profilimni tahlil qil va bio'ni qayta yoz: instagram.com/username</pre><button type="button" data-copy>Nusxa</button></div>
+        <div class="code ask"><pre>Shu g'oyadan 30 soniyalik reels ssenariysi yoz: ...</pre><button type="button" data-copy>Nusxa</button></div>
+        <div class="code ask"><pre>Menga bir haftalik kontent plan tuzib ber. Sohasim: ...</pre><button type="button" data-copy>Nusxa</button></div>
+      </li>
+    </ol>
+    <p class="note"><b>Har yangi chatda</b> faylni qayta tashlaysiz. Ssenariylar o'zingizga o'xshab chiqishi uchun 2–3 ta eski reelsingiz matnini ham qo'shib yuboring.</p>
+  </section>
+
+  <section>
     <h2>Nimalar qila oladi</h2>
-    <p class="sub">Claude'ga shu buyruqlardan birini yozasiz, u ishni bajaradi. Hech narsa o'zi joylanmaydi: skill yozadi, joylashni o'zingiz qilasiz.</p>
+    <p class="sub">Buyruqni yozishingiz shart emas, oddiy so'z bilan so'rang. Claude o'zi mosini tanlaydi.</p>
     <div class="grid">
       <div class="cmd"><code>/ig-profile</code><p>Profilingizni 100 balldan baholaydi va bio'ni qayta yozadi.</p></div>
       <div class="cmd"><code>/ig-reel</code><p>G'oyadan reels: 3 ta hook, ssenariy, ekrandagi matn.</p></div>
@@ -93,62 +112,51 @@
   </section>
 
   <section>
-    <h2>O'rnatish</h2>
-    <p class="sub">O'zingizga mos yo'lni tanlang.</p>
-
+    <h2>Har safar tashlamaslik uchun</h2>
+    <p class="sub">Faylni har chatda biriktirish erinarli bo'lsa, skillarni Claude'ga bir marta o'rnatib qo'ying. Kompyuterda qilish qulayroq.</p>
+    <details>
+      <summary>O'rnatish yo'riqnomasini ochish</summary>
     <div class="route">
-      <h3>1-yo'l: claude.ai yoki Claude ilovasi</h3>
-      <p class="who">Ko'pchilik uchun shu. Bepul tarifda ham ishlaydi.</p>
-      <ol class="steps">
-        <li>Skillarni yuklab oling:
-          <br><a class="btn" href="ig-skills-hammasi.zip" download>Hammasini yuklab olish (13 ta skill)</a>
-          <br>Faylni oching (unzip). Ichida 13 ta alohida <span class="path">.zip</span> fayl bor, ularni ochmang, o'zini yuklaysiz.
-          <details><summary>Yoki bittalab yuklab oling</summary>
-            <div class="zips">
-              <a href="skills/ig-profile.zip" download>ig-profile</a><a href="skills/ig-reel.zip" download>ig-reel</a><a href="skills/ig-caption.zip" download>ig-caption</a>
-              <a href="skills/ig-plan.zip" download>ig-plan</a><a href="skills/ig-viral.zip" download>ig-viral</a><a href="skills/ig-audit.zip" download>ig-audit</a>
-              <a href="skills/ig-story.zip" download>ig-story</a><a href="skills/ig-carousel.zip" download>ig-carousel</a><a href="skills/ig-reply.zip" download>ig-reply</a>
-              <a href="skills/ig-dm.zip" download>ig-dm</a><a href="skills/ig-comment.zip" download>ig-comment</a><a href="skills/ig-repurpose.zip" download>ig-repurpose</a>
-              <a href="skills/ig-human.zip" download>ig-human</a>
-            </div>
-          </details>
-        </li>
-        <li>claude.ai'da <span class="path">Settings → Capabilities</span> ga kiring va <b>Code execution</b> (yoki "Create and edit files") ni yoqing. Skillar shusiz ishlamaydi.</li>
-        <li><span class="path">Customize → Skills</span> ga o'ting, <b>+</b> tugmasini bosib, skill yuklash variantini tanlang.</li>
-        <li>Bitta <span class="path">.zip</span> faylni yuklang. Har bir skill uchun shuni takrorlang. Boshlash uchun eng kerakli uchtasi yetadi: <b>ig-profile</b>, <b>ig-reel</b>, <b>ig-plan</b>.</li>
-        <li>Yangi chat oching va yozing: <span class="path">/ig-profile</span> va Instagram profilingiz linki.</li>
-      </ol>
-      <p class="note">Skill yuklash kompyuterda (brauzer yoki desktop ilova) qulayroq. Yuklab bo'lgach, telefondagi Claude ilovasida ham ishlataverasiz.</p>
-    </div>
-
-    <div class="route">
-      <h3>2-yo'l: Claude Code</h3>
-      <p class="who">Kompyuterda Claude Code ishlatsangiz.</p>
-      <ol class="steps">
-        <li>Plagin sifatida o'rnating:
-          <div class="code"><pre>/plugin marketplace add Jakeschincariol/instagram-agent-skill
-/plugin install instagram-agent</pre><button type="button" data-copy>Nusxa</button></div>
-        </li>
-        <li>Yoki terminalda qo'lda:
-          <div class="code"><pre>git clone https://github.com/Jakeschincariol/instagram-agent-skill.git
-cp -r instagram-agent-skill/skills/ig-* ~/.claude/skills/</pre><button type="button" data-copy>Nusxa</button></div>
-        </li>
-        <li>Claude Code'da <span class="path">/ig-reel</span> deb yozib tekshiring.</li>
-      </ol>
-    </div>
-  </section>
-
-  <section>
-    <h2>Birinchi 10 daqiqa</h2>
-    <p class="sub">Natija yaxshi chiqishi uchun shu ikki qadamni qiling.</p>
-    <ol class="steps">
-      <li><b>Ovozingizni o'rgating.</b> Claude'ga o'zingizning 3 ta reelsingiz matnini yuboring va yozing:
-        <div class="code"><pre>Mana mening 3 ta reelsim matni. Shulardan voice.md yozib ber, keyingi ssenariylar shu uslubda bo'lsin.</pre><button type="button" data-copy>Nusxa</button></div>
-        Shunda ssenariylar siz gapiradigan tilda chiqadi. <a href="voice.md" download>voice.md namunasi</a>
-      </li>
-      <li><b>Profildan boshlang:</b> <span class="path">/ig-profile</span>, keyin <span class="path">/ig-plan</span>. Plan tayyor bo'lgach, har bir post uchun <span class="path">/ig-reel</span> va <span class="path">/ig-caption</span>.</li>
-    </ol>
-    <p class="note"><b>Bilib qo'ying:</b> hook va matnni baholaydigan vositalar ingliz tili uchun sozlangan. O'zbekcha matnda ballarni taxminiy deb qabul qiling, ssenariy va g'oyalar esa o'zbekcha yaxshi ishlaydi.</p>
+        <h3>1-yo'l: claude.ai yoki Claude ilovasi</h3>
+        <p class="who">Ko'pchilik uchun shu. Bepul tarifda ham ishlaydi.</p>
+        <ol class="steps">
+          <li>Skillarni yuklab oling:
+            <br><a class="btn" href="ig-skills-hammasi.zip" download>Hammasini yuklab olish (13 ta skill)</a>
+            <br>Faylni oching (unzip). Ichida 13 ta alohida <span class="path">.zip</span> fayl bor, ularni ochmang, o'zini yuklaysiz.
+            <details><summary>Yoki bittalab yuklab oling</summary>
+              <div class="zips">
+                <a href="skills/ig-profile.zip" download>ig-profile</a><a href="skills/ig-reel.zip" download>ig-reel</a><a href="skills/ig-caption.zip" download>ig-caption</a>
+                <a href="skills/ig-plan.zip" download>ig-plan</a><a href="skills/ig-viral.zip" download>ig-viral</a><a href="skills/ig-audit.zip" download>ig-audit</a>
+                <a href="skills/ig-story.zip" download>ig-story</a><a href="skills/ig-carousel.zip" download>ig-carousel</a><a href="skills/ig-reply.zip" download>ig-reply</a>
+                <a href="skills/ig-dm.zip" download>ig-dm</a><a href="skills/ig-comment.zip" download>ig-comment</a><a href="skills/ig-repurpose.zip" download>ig-repurpose</a>
+                <a href="skills/ig-human.zip" download>ig-human</a>
+              </div>
+            </details>
+          </li>
+          <li>claude.ai'da <span class="path">Settings → Capabilities</span> ga kiring va <b>Code execution</b> (yoki "Create and edit files") ni yoqing. Skillar shusiz ishlamaydi.</li>
+          <li><span class="path">Customize → Skills</span> ga o'ting, <b>+</b> tugmasini bosib, skill yuklash variantini tanlang.</li>
+          <li>Bitta <span class="path">.zip</span> faylni yuklang. Har bir skill uchun shuni takrorlang. Boshlash uchun eng kerakli uchtasi yetadi: <b>ig-profile</b>, <b>ig-reel</b>, <b>ig-plan</b>.</li>
+          <li>Yangi chat oching va yozing: <span class="path">/ig-profile</span> va Instagram profilingiz linki.</li>
+        </ol>
+        <p class="note">Skill yuklash kompyuterda (brauzer yoki desktop ilova) qulayroq. Yuklab bo'lgach, telefondagi Claude ilovasida ham ishlataverasiz.</p>
+      </div>
+  
+      <div class="route">
+        <h3>2-yo'l: Claude Code</h3>
+        <p class="who">Kompyuterda Claude Code ishlatsangiz.</p>
+        <ol class="steps">
+          <li>Plagin sifatida o'rnating:
+            <div class="code"><pre>/plugin marketplace add Jakeschincariol/instagram-agent-skill
+  /plugin install instagram-agent</pre><button type="button" data-copy>Nusxa</button></div>
+          </li>
+          <li>Yoki terminalda qo'lda:
+            <div class="code"><pre>git clone https://github.com/Jakeschincariol/instagram-agent-skill.git
+  cp -r instagram-agent-skill/skills/ig-* ~/.claude/skills/</pre><button type="button" data-copy>Nusxa</button></div>
+          </li>
+          <li>Claude Code'da <span class="path">/ig-reel</span> deb yozib tekshiring.</li>
+        </ol>
+      </div>
+    </details>
   </section>
 
   <footer>
